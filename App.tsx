@@ -14,11 +14,16 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
 
+import { useAppSelector } from './src/hooks/useRedux';
+import { AuthStackNavigator } from './src/navigation/Auth.navigator';
+
 function App(): JSX.Element {
+  const isLoggedIn = useAppSelector(state => state.userReducer.isLoggedIn);
+
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <DrawerNavigator />
+        {isLoggedIn ? <AuthStackNavigator /> : <DrawerNavigator />}
       </NavigationContainer>
     </Provider>
   );
