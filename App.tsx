@@ -14,16 +14,15 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
 
-import { useAppSelector } from './src/hooks/useRedux';
-import { AuthStackNavigator } from './src/navigation/Auth.navigator';
+import { MainNavigation } from './src/navigation/Main.navigator';
 
 function App(): JSX.Element {
-  const isLoggedIn = useAppSelector(state => state.userReducer.isLoggedIn);
-
   return (
     <Provider store={store}>
       <NavigationContainer>
-        {isLoggedIn ? <AuthStackNavigator /> : <DrawerNavigator />}
+        <SafeAreaView style={styles.container}>
+          <MainNavigation />
+        </SafeAreaView>
       </NavigationContainer>
     </Provider>
   );
@@ -32,6 +31,10 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 
