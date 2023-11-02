@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { FormInput } from '../components/FormInput';
+import { AppButton } from '../components/AppButton';
 import { SPACING } from '../theme';
 
 export const Login = () => {
@@ -15,20 +16,34 @@ export const Login = () => {
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       <FormInput
-        placeholder="whatever"
+        placeholder="Email"
         value={val}
         onChangeText={text => handleChange(text)}
         secureTextEntry={false}
+        keyboardType="email-address"
+        customStyle={styles.customInputStyle}
+      />
+      <FormInput
+        placeholder="Password"
+        value={val}
+        onChangeText={text => handleChange(text)}
+        secureTextEntry={true}
         keyboardType="default"
         customStyle={styles.customInputStyle}
       />
+      <AppButton buttonText="Submit" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: '10%',
+  },
   customInputStyle: {
     textAlign: 'center',
     marginVertical: SPACING.spacing10,
